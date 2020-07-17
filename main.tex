@@ -1,40 +1,118 @@
 \documentclass{article}
+
 % replace this with your conference style file
 \usepackage{fullpage}
+% to increase the number of fonts can be used
+\newcommand\hmmax{0}
+\newcommand\bmmax{0}
+\usepackage{amsmath,amsthm,amssymb}
 
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
+
+% use biblatex; it's 21 century!
 % feel free to change some options
-\usepackage[backend=biber,maxbibnames=5,style=numeric,maxcitenames=2,backref=false,uniquelist=false,uniquename=false,sorting=none,defernumbers=true]{biblatex}
+\usepackage[backend=biber,maxbibnames=5,style=numeric,maxcitenames=2,backref=false,uniquelist=false,uniquename=false,sorting=none,defernumbers=true,noerroretextools=true]{biblatex}
 \usepackage{csquotes}
 \addbibresource{yaoliang.bib}
+% in case someone is used to natbib
 \newcommand{\citep}{\parencite}
+\newcommand{\citet}{\textcite}
 
+\usepackage{xcolor}
 \usepackage[colorlinks,linkcolor=black,citecolor=black,urlcolor=magenta,bookmarks=true]{hyperref}
 
+% for easy cross-reference
 \usepackage{cleveref}
 
+% for better tables
 \usepackage{booktabs}
+% for controlling margins in enumerate/itemize
+\usepackage{enumitem}
 
 \usepackage{xspace}
-\usepackage[export]{adjustbox}
-\usepackage{menukeys}
 \usepackage{graphicx,multirow}
+% all figures go to the dedicated folder "figs"
+\graphicspath{{figs/}}
 
+% to draw pretty figures
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,shadows,positioning,fadings,calc,shapes,fit}
+\usepackage{pgfplots}
 
-% *** Algorithms *** %
+% allow equations to be numbered only when necessary 
+% it is actually a good practice to number every equation (for the reader's sake)
+\let\etoolboxforlistloop\forlistloop % save the good meaning of \forlistloop
+\usepackage{autonum}
+\let\forlistloop\etoolboxforlistloop % restore the good meaning of \forlistloop
+
+% algorithm
 \usepackage[linesnumbered,ruled,vlined]{algorithm2e}
 
-\title{How to write a \LaTeX draft}
+
+\newcommand{\lb}{\mathtt{lb}}
+\newcommand{\ub}{\mathtt{ub}}
+\newcommand{\med}{\mathtt{med}}
+\newcommand{\mi}{\mathtt{maxiter}}
+\newcommand{\tol}{\mathtt{tol}}
+\newcommand{\Fsf}{\mathsf{F}}
+
+\title{How to write a \LaTeX\ draft}
 \author{Yaoliang Yu}
 \date{July 2020}
 
 \begin{document}
+	
+	\maketitle
+	
+	\begin{abstract}
+		This is a sample \LaTeX\ file.
+	\end{abstract}
+	
+	\section{Conventions}
+	\begin{itemize}[itemsep=0pt,topsep=0pt,leftmargin=*]
+		\item Figures and tables usually are placed at the top of each page. Ocassionally at the bottom.
+		\item Figure captions placed under the figure.
+		\item Table captions placed above the table. Some conferences do the opposite.
+	\end{itemize}
 
-\maketitle
+% change the option to [t] to place alg on top
+\begin{algorithm}[H]
+	\DontPrintSemicolon
+	\KwIn{$u\in(0,1), \lb \leq \ub, \mi, \tol$}
+	
+	\KwOut{$x$ such that $|\Fsf(x) - u| \leq \tol$}
+	
+	\While{$\Fsf(\lb) > u$}{
+		$\ub \gets \lb$
+		
+		$\lb \gets \lb /2$
+	}
+	
+	\While{$\Fsf(\ub) < u$}{
+		$\lb \gets \ub$
+		
+		$\ub \gets \ub * 2$
+	}
+	
+	\For{$i=1, \ldots, \mi$ }{
+		
+		$x \gets \tfrac{\lb+\ub}{2}$
+		
+		$t \gets \Fsf(x)$
+		
+		
+		\If{ $t > u$}{$\ub \gets x$}
+		\Else{$\lb \gets x$}
+		
+		\If{$ |t - u| \leq \tol $}{\textbf{break}}
+		
+	}
+	
+	\caption{Binary search for solving a monotonic nonlinear equation $\Fsf(x) = u$.}
+	\label{alg:bs}
+\end{algorithm}
 
-\section{Conventions}
-
-
-\printbibliography[title={References}]
+	
+	\printbibliography[title={References}]
 \end{document}
