@@ -6,6 +6,11 @@
 \newcommand\hmmax{0}
 \newcommand\bmmax{0}
 \usepackage{amsmath,amsthm,amssymb}
+\usepackage{nicefrac} % compact symbols for 1/2, etc.
+
+% for proofs
+\usepackage[conf={normal}]{proof-at-the-end}
+\newtheorem{thm}{Theorem}
 
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
@@ -140,6 +145,16 @@ For writing a longer paper, need to split the main file into:
 
 \input{appendix}
 \end{verbatim}
+
+To use \verb|proof-at-the-end|, 
+\begin{theoremEnd}{thm}[Yes I can have a title]
+\label{thm:ilikelabels}
+Creating a new theorem is easy
+\end{theoremEnd}
+\begin{proofEnd}
+You want a proof? Here is it!
+\end{proofEnd}
+See the \href{http://ctan.mirror.globo.tech/macros/latex/contrib/proof-at-the-end/proof-at-the-end.pdf}{documentation} about how to toggle proofs (appearing in the main text or appendix).
 	
 \printbibliography[title={References}]
 \end{document}
