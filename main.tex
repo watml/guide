@@ -14,6 +14,7 @@
 % feel free to change some options
 \usepackage[backend=biber,maxbibnames=5,style=numeric,maxcitenames=2,backref=false,uniquelist=false,uniquename=false,sorting=none,defernumbers=true,noerroretextools=true]{biblatex}
 \usepackage{csquotes}
+% change this to your bibfile
 \addbibresource{yaoliang.bib}
 % in case someone is used to natbib
 \newcommand{\citep}{\parencite}
@@ -48,8 +49,17 @@
 
 % algorithm
 \usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+\crefname{algocf}{algorithm}{algorithms}
+\Crefname{algocf}{Algorithm}{Algorithms}
+% if do not wish to number algorithms
+%\renewcommand{\thealgocf}{}
+
+% use todonotes for comments
+\usepackage{todonotes}
+\newcommand{\todoy}[2][]{\todo[size=\tiny,color=green!20!white,#1]{YY: #2}\xspace}
 
 
+% define your own commands
 \newcommand{\lb}{\mathtt{lb}}
 \newcommand{\ub}{\mathtt{ub}}
 \newcommand{\med}{\mathtt{med}}
@@ -63,56 +73,56 @@
 
 \begin{document}
 	
-	\maketitle
+\maketitle
 	
-	\begin{abstract}
-		This is a sample \LaTeX\ file.
-	\end{abstract}
+\begin{abstract}
+This is a sample \LaTeX\ file.
+\end{abstract}
 	
-	\section{Conventions}
-	\begin{itemize}[itemsep=0pt,topsep=0pt,leftmargin=*]
-		\item Figures and tables usually are placed at the top of each page. Ocassionally at the bottom.
-		\item Figure captions placed under the figure.
-		\item Table captions placed above the table. Some conferences do the opposite.
-	\end{itemize}
-
+\section{Conventions}
+\begin{itemize}[itemsep=0pt,topsep=0pt,leftmargin=*]
+\item Figures and tables usually are placed at the top of each page. Ocassionally at the bottom.
+\item Figure captions placed under the figure.
+\item Table captions placed above the table. Some conferences do the opposite.
+\end{itemize}
+	
 % change the option to [t] to place alg on top
 \begin{algorithm}[H]
-	\DontPrintSemicolon
-	\KwIn{$u\in(0,1), \lb \leq \ub, \mi, \tol$}
-	
-	\KwOut{$x$ such that $|\Fsf(x) - u| \leq \tol$}
-	
-	\While{$\Fsf(\lb) > u$}{
-		$\ub \gets \lb$
+\DontPrintSemicolon
+\KwIn{$u\in(0,1), \lb \leq \ub, \mi, \tol$}
 		
-		$\lb \gets \lb /2$
-	}
-	
-	\While{$\Fsf(\ub) < u$}{
-		$\lb \gets \ub$
+\KwOut{$x$ such that $|\Fsf(x) - u| \leq \tol$}
 		
-		$\ub \gets \ub * 2$
-	}
-	
-	\For{$i=1, \ldots, \mi$ }{
-		
-		$x \gets \tfrac{\lb+\ub}{2}$
-		
-		$t \gets \Fsf(x)$
-		
-		
-		\If{ $t > u$}{$\ub \gets x$}
-		\Else{$\lb \gets x$}
-		
-		\If{$ |t - u| \leq \tol $}{\textbf{break}}
-		
-	}
-	
-	\caption{Binary search for solving a monotonic nonlinear equation $\Fsf(x) = u$.}
-	\label{alg:bs}
-\end{algorithm}
+\While{$\Fsf(\lb) > u$}{
+$\ub \gets \lb$
 
+$\lb \gets \lb /2$
+}
+		
+\While{$\Fsf(\ub) < u$}{
+$\lb \gets \ub$
+			
+$\ub \gets \ub * 2$
+}
+		
+\For{$i=1, \ldots, \mi$ }{
+			
+$x \gets \tfrac{\lb+\ub}{2}$
+			
+$t \gets \Fsf(x)$
+			
+\If{ $t > u$}{$\ub \gets x$}
+\Else{$\lb \gets x$}
+			
+\If{$ |t - u| \leq \tol $}{\textbf{break}}
+}
+		
+\caption{Binary search for solving a monotonic nonlinear equation $\Fsf(x) = u$.}
+\label{alg:bs}
+\end{algorithm}
+Let's cite the above algorithm using \verb|cleveref|: \Cref{alg:bs}.
+
+Let's cite a paper: \parencite{Yu13}.
 	
-	\printbibliography[title={References}]
+\printbibliography[title={References}]
 \end{document}
