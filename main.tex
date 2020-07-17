@@ -1,0 +1,40 @@
+\documentclass{article}
+% replace this with your conference style file
+\usepackage{fullpage}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+% feel free to change some options
+\usepackage[backend=biber,maxbibnames=5,style=numeric,maxcitenames=2,backref=false,uniquelist=false,uniquename=false,sorting=none,defernumbers=true]{biblatex}
+\usepackage{csquotes}
+\addbibresource{yaoliang.bib}
+\newcommand{\citep}{\parencite}
+
+\usepackage[colorlinks,linkcolor=black,citecolor=black,urlcolor=magenta,bookmarks=true]{hyperref}
+
+\usepackage{cleveref}
+
+\usepackage{booktabs}
+
+\usepackage{xspace}
+\usepackage[export]{adjustbox}
+\usepackage{menukeys}
+\usepackage{graphicx,multirow}
+
+
+% *** Algorithms *** %
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+
+\title{How to write a \LaTeX draft}
+\author{Yaoliang Yu}
+\date{July 2020}
+
+\begin{document}
+
+\maketitle
+
+\section{Conventions}
+
+
+\printbibliography[title={References}]
+\end{document}
