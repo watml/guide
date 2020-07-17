@@ -15,7 +15,7 @@
 \usepackage[backend=biber,maxbibnames=5,style=numeric,maxcitenames=2,backref=false,uniquelist=false,uniquename=false,sorting=none,defernumbers=true,noerroretextools=true]{biblatex}
 \usepackage{csquotes}
 % change this to your bibfile
-\addbibresource{yaoliang.bib}
+\addbibresource{main.bib}
 % in case someone is used to natbib
 \newcommand{\citep}{\parencite}
 \newcommand{\citet}{\textcite}
@@ -123,6 +123,23 @@ $t \gets \Fsf(x)$
 Let's cite the above algorithm using \verb|cleveref|: \Cref{alg:bs}.
 
 Let's cite a paper: \parencite{Yu13}.
+
+For writing a longer paper, need to split the main file into:
+\begin{verbatim}
+\input{introduction}
+
+\input{background}
+
+\input{main results}
+
+\input{experiments}
+
+\input{discussion}
+
+\input{conclusion}
+
+\input{appendix}
+\end{verbatim}
 	
 \printbibliography[title={References}]
 \end{document}
